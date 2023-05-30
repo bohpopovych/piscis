@@ -12,6 +12,7 @@ type ButtonProps = {
   children?: JSX.Element;
   type?: 'primary' | 'border' | 'label';
   size?: 'small' | 'regular' | 'large';
+  style?: any;
   onPress?: () => void;
 };
 
@@ -23,11 +24,12 @@ export default function CustomButton({
   leftArrow = false,
   rightArrow = false,
   title,
+  style,
   onPress,
 }: ButtonProps) {
   return (
     <TouchableOpacity
-      style={[styles.button, styles[`${type}Button`], styles[`${size}Button`]]}
+      style={[styles.button, styles[`${type}Button`], styles[`${size}Button`], style]}
       disabled={isDisable}
       onPress={onPress}>
       {leftArrow && (

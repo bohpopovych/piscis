@@ -3,8 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import theme from '../theme';
 
-import PostsScreen from '../screens/posts/PostsScreen';
-import ProfileScreen from '../screens/profile/ProfileScreen';
+import PostsNavigator from './posts';
+import ProfileNavigator from './profile';
 
 import {
   FeedIcon,
@@ -33,13 +33,17 @@ export default function AppNavigator() {
       }}>
       <Tab.Screen
         name="Профіль"
-        component={ProfileScreen}
+        component={ProfileNavigator}
         options={getTabScreenIcon(ProfileIcon)}
       />
-      <Tab.Screen name="Стрічка" component={PostsScreen} options={getTabScreenIcon(FeedIcon)} />
-      <Tab.Screen name="Популярне" component={PostsScreen} options={getTabScreenIcon(StarIcon)} />
-      <Tab.Screen name="Карта" component={PostsScreen} options={getTabScreenIcon(MarkerIcon)} />
-      <Tab.Screen name="Події" component={PostsScreen} options={getTabScreenIcon(EventIcon)} />
+      <Tab.Screen name="Стрічка" component={PostsNavigator} options={getTabScreenIcon(FeedIcon)} />
+      <Tab.Screen
+        name="Популярне"
+        component={PostsNavigator}
+        options={getTabScreenIcon(StarIcon)}
+      />
+      <Tab.Screen name="Карта" component={PostsNavigator} options={getTabScreenIcon(MarkerIcon)} />
+      <Tab.Screen name="Події" component={PostsNavigator} options={getTabScreenIcon(EventIcon)} />
     </Tab.Navigator>
   );
 }

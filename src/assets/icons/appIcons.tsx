@@ -6,13 +6,13 @@ export type TabIconPropsTypes = {
 };
 
 export const PlusIcon = ({ color }: TabIconPropsTypes) => (
-  <Svg width="24" height="24" fill="none">
+  <Svg width="16" height="16" fill="none">
     <Path
       stroke={color}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2"
-      d="M12 5v14M5 12h14"
+      d="M8 3.33v9.34M3.33 8h9.34"
     />
   </Svg>
 );

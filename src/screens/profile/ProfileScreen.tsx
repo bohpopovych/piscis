@@ -1,5 +1,4 @@
 import React from 'react';
-import FastImage from 'react-native-fast-image';
 
 import {
   Dimensions,
@@ -14,95 +13,90 @@ import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
 import theme from '../../theme';
 
-import { PlusIcon } from '../../assets/icons/appIcons';
-
 import CustomText from '../../components/CustomText';
 import CustomSpacer from '../../components/CustomSpacer';
 import CustomButton from '../../components/CustomButton';
+import CustomRoundButton from '../../components/CustomRoundButton';
 
 type PropsTypes = {
   navigation: NavigationProp<ParamListBase>;
 };
 
 export default function ProfileScreen({ navigation }: PropsTypes) {
-  const postPhotoWidth = Dimensions.get('window').width / 3 - 8;
-  console.log('444444444444',Dimensions.get('window').width,Dimensions.get('window').width / 3 )
+  const postPhotoWidth = Dimensions.get('window').width / 3;
+
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <View style={styles.topWrap}>
-          <CustomText weight="bold" type="big">
-            Мій профіль
-          </CustomText>
-          <CustomButton title="" size="small">
-            <PlusIcon color={theme.background.color.white} />
-          </CustomButton>
-        </View>
-        <View style={styles.photoWrap}>
-          <CustomSpacer align="center" position={['top']} size="huge">
-            <Image
-              style={styles.profilePhoto}
-              source={{
-                uri: 'http://localhost:5000/uploads/1737acc6d5c574e1606afbdf1a74b1ac.jpg',
-              }}
-            />
-          </CustomSpacer>
-        </View>
-        <CustomSpacer align="center" position={['top']} size="regular">
-          <CustomButton type="border" size="small" title="Редагувати профіль" />
-        </CustomSpacer>
-      </View>
-      <View style={styles.content}>
-        <CustomText position="center">No Posts</CustomText>
-        <FlatList
-          contentContainerStyle={styles.postWrap}
-          data={[
-            {
-              id: 1,
-              url: 'http://localhost:5000/uploads/1737acc6d5c574e1606afbdf1a74b1ac.jpg',
-            },
-            {
-              id: 2,
-              url: 'http://localhost:5000/uploads/1737acc6d5c574e1606afbdf1a74b1ac.jpg',
-            },
-            {
-              id: 3,
-              url: 'http://localhost:5000/uploads/1737acc6d5c574e1606afbdf1a74b1ac.jpg',
-            },
-            {
-              id: 4,
-              url: 'http://localhost:5000/uploads/1737acc6d5c574e1606afbdf1a74b1ac.jpg',
-            },
-            {
-              id: 5,
-              url: 'http://localhost:5000/uploads/1737acc6d5c574e1606afbdf1a74b1ac.jpg',
-            },
-          ]}
-          renderItem={({ item }) => {
-            return (
-              <View style={styles.postWrap}>
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate('PostDetail', {
-                      post: item,
-                    })
-                  }>
-                  <Image
-                    width={postPhotoWidth}
-                    height={postPhotoWidth}
-                    style={styles.postPhoto}
-                    source={{
-                      uri: item.url,
-                    }}
-                  />
-                </TouchableOpacity>
-              </View>
-            );
-          }}
-          numColumns={3}
-          keyExtractor={item => item.id}
-        />
-      </View>
+      <FlatList
+        // eslint-disable-next-line react/no-unstable-nested-components
+        ListHeaderComponent={() => (
+          <View style={styles.container}>
+            <View style={styles.topWrap}>
+              <CustomText weight="bold" type="huge">
+                Мій профіль
+              </CustomText>
+              <CustomRoundButton onPress={() => navigation.navigate('CreatePost')} />
+            </View>
+            <View style={styles.photoWrap}>
+              <CustomSpacer align="center" position={['top']} size="huge">
+                <Image
+                  style={styles.profilePhoto}
+                  source={{
+                    uri: 'http://localhost:5000/uploads/1737acc6d5c574e1606afbdf1a74b1ac.jpg',
+                  }}
+                />
+              </CustomSpacer>
+            </View>
+            <CustomSpacer align="center" position={['top']} size="regular">
+              <CustomButton type="border" size="small" title="Редагувати профіль" />
+            </CustomSpacer>
+          </View>
+        )}
+        data={[
+          {
+            id: 1,
+            url: 'http://localhost:5000/uploads/1737acc6d5c574e1606afbdf1a74b1ac.jpg',
+          },
+          {
+            id: 2,
+            url: 'http://localhost:5000/uploads/1737acc6d5c574e1606afbdf1a74b1ac.jpg',
+          },
+          {
+            id: 3,
+            url: 'http://localhost:5000/uploads/1737acc6d5c574e1606afbdf1a74b1ac.jpg',
+          },
+          {
+            id: 4,
+            url: 'http://localhost:5000/uploads/1737acc6d5c574e1606afbdf1a74b1ac.jpg',
+          },
+          {
+            id: 5,
+            url: 'http://localhost:5000/uploads/1737acc6d5c574e1606afbdf1a74b1ac.jpg',
+          },
+        ]}
+        renderItem={({ item }) => {
+          return (
+            <View style={styles.photoWrap}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('PostDetail', {
+                    post: item,
+                  })
+                }>
+                <Image
+                  width={postPhotoWidth}
+                  height={postPhotoWidth}
+                  source={{
+                    uri: item.url,
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+          );
+        }}
+        numColumns={3}
+        keyExtractor={item => item.id}
+      />
     </SafeAreaView>
   );
 }
@@ -120,7 +114,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   content: {
-    // paddingHorizontal: 24,
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
@@ -138,12 +131,6 @@ const styles = StyleSheet.create({
     width: 96,
     height: 96,
     borderRadius: 96,
-    resizeMode: 'cover',
-  },
-  postWrap: {
-    margin: 4,
-  },
-  postPhoto: {
     resizeMode: 'cover',
   },
 });
