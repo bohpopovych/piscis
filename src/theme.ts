@@ -20,6 +20,7 @@ const theme = {
       white: '#FFFFFF',
       primary: '#F5F5F5',
       secondary: '#2659F4',
+      gray: '#F9F9F9',
     },
   },
   input: {
