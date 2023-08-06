@@ -16,39 +16,46 @@ type PropsTypes = {
 
 export default function AccountScreen({ navigation }: PropsTypes) {
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <View style={styles.background}>
-          <View style={styles.image}>
-            <SvgXml xml={pole} />
+    <>
+      <SafeAreaView style={styles.header} />
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.container}>
+          <View style={styles.background}>
+            <View style={styles.image}>
+              <SvgXml xml={pole} />
+            </View>
+            <Text style={styles.label}>Piscis</Text>
+            <View style={styles.wave}>
+              <SvgXml xml={wave} />
+            </View>
           </View>
-          <Text style={styles.label}>Piscis</Text>
-          <View style={styles.wave}>
-            <SvgXml xml={wave} />
+          <View style={styles.buttonWrap}>
+            <CustomSpacer position={['top', 'bottom']} size="small">
+              <CustomButton
+                type="primary"
+                title="Реєстрація"
+                onPress={() => navigation.navigate('RegisterName')}
+              />
+            </CustomSpacer>
+            <CustomSpacer position={['top', 'bottom']} size="small">
+              <CustomButton
+                type="border"
+                title="Увійти"
+                onPress={() => navigation.navigate('Login')}
+              />
+            </CustomSpacer>
           </View>
         </View>
-        <View style={styles.buttonWrap}>
-          <CustomSpacer position={['top', 'bottom']} size="small">
-            <CustomButton
-              type="primary"
-              title="Реєстрація"
-              onPress={() => navigation.navigate('RegisterName')}
-            />
-          </CustomSpacer>
-          <CustomSpacer position={['top', 'bottom']} size="small">
-            <CustomButton
-              type="border"
-              title="Увійти"
-              onPress={() => navigation.navigate('Login')}
-            />
-          </CustomSpacer>
-        </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
+  header: {
+    flex: 0,
+    backgroundColor: `${theme.background.color.secondary}`,
+  },
   safeArea: {
     flex: 1,
     backgroundColor: `${theme.background.color.primary}`,
